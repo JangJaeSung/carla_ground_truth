@@ -5,8 +5,8 @@ This Python API gets a variety of data from CARLA Simulator and also helps autom
 
 Installation
 --------------
-##> cd [carla directory]/PythonAPI/examples
-##> git clone https://github.com/JangJaeSung/carla_ground_truth.git
+> cd [carla directory]/PythonAPI/examples
+> git clone https://github.com/JangJaeSung/carla_ground_truth.git
 
 generate_ground_truth.py
 ---------------------------
