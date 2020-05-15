@@ -3,7 +3,8 @@ Automatic Ground Truth Generation in CARLA
 
 This Python API gets a variety of data from CARLA Simulator and also helps automatically generate Ground Truth according to the Darknet YOLO Framework.
 
-<img src="https://user-images.githubusercontent.com/36737287/82050024-5c1edd00-96f2-11ea-810d-3f8fcc664901.png" width="90%"><\img>
+<img src="https://user-images.githubusercontent.com/36737287/82050024-5c1edd00-96f2-11ea-810d-3f8fcc664901.png" width="90%">
+<\img>
 
 Installation
 --------------
