@@ -22,12 +22,12 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 > ./dynamic_weather.py  
 
 * Execute Generating Code  
-> ./generate_ground_truth.py -l N  
+> ./object_bounding_box.py -l N  
 
 object_bounding_box.py
 ------------------------
 This API helps to post-process the data obtained above and to create a Ground Truth for Darknet YOLO Framework.  
 Data for learning is stored in folder 'custom_data', and the results of the bounding box generated in folder 'draw_bounding_box' can be seen.
-> ./object_bounding_box.py  
+> ./generate_ground_truth.py  
 
 
