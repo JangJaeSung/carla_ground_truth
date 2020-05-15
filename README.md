@@ -13,9 +13,14 @@ generate_ground_truth.py
 This API helps you information about the RGB Image, Semantic Segmentation Image and Bounding Box of Objects from the CARLA Server. In addition, it allows users to capture these informations at regular intervals and keyboard input.
 
 CARLA Server on  
-##> ./CarlaUE4.sh
+> ./CarlaUE4.sh
 
+Spawn Object and Change Various Weathers (CARLA Python example)  
+> ./spawn_npc.py  
+> ./dynamic_weather.py  
 
+Execute Generating Code  
+> ./generate_ground_truth.py -l N  
 
 
 #Paper
