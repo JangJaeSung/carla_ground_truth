@@ -1,4 +1,4 @@
-Automatic Ground Truth Generation using CARLA Simulator
+Automatic Ground Truth Generation in CARLA Simulator
 =======================================================
 
 
