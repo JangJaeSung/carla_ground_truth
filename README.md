@@ -19,13 +19,13 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 
 * Spawn Object and Change Various Weathers (CARLA Python example). Link: [https://github.com/carla-simulator/carla/tree/master/PythonAPI/examples]  
 Spawn NPC (Vehicles and Walkers).
-> ./spawn_npc.py -n N -w W  
+> ./spawn_npc.py -n *N* -w *W*  
 > ./dynamic_weather.py  
 
-** Execute Generating Code **  
+**Execute Generating Code**  
 Obtain information about RGB Image, Semantic segmentation Image and Bounding Boxes for Ground Truth Generation from CARLA.
 When a period (loop N) is specified, data capture is executed at that interval. This API helps users control the start and end of automatic capture through keyboard input. It also provides a feature that allows users to capture the scene they want immediately at the moment.  
-> ./extract_bounding_box.py -l N   
+> ./extract_bounding_box.py -l *N*   
 
 These datas (RGB, Segmentation and Bounding Box) are stored in different folders at the same time.
 
