@@ -10,7 +10,7 @@ Installation
 > cd [carla directory]/PythonAPI/examples  
 > git clone https://github.com/JangJaeSung/carla_ground_truth.git
 
-generate_ground_truth.py
+object_bounding_box.py
 ---------------------------
 This API helps you information about the RGB Image, Semantic Segmentation Image and Bounding Box of Objects from the CARLA Server. In addition, it allows users to capture these informations at regular intervals and keyboard input.
 
@@ -24,7 +24,7 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 * Execute Generating Code  
 > ./object_bounding_box.py -l N  
 
-object_bounding_box.py
+generate_ground_truth.py
 ------------------------
 This API helps to post-process the data obtained above and to create a Ground Truth for Darknet YOLO Framework.  
 Data for learning is stored in folder 'custom_data', and the results of the bounding box generated in folder 'draw_bounding_box' can be seen.
