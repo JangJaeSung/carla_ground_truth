@@ -185,7 +185,7 @@ def fitting_x(x1, x2, range_min, range_max, color):
     if (x1 < x2):
         for search_point in range(x1, x2):
             for range_of_points in range(range_min, range_max):
-                if seg_info[range_of_points, search_point][0] == color:
+                if seg_info[range_of_points, search_point][0] == color[0]:
                     cali_point = search_point
                     state = True
                     break
@@ -195,7 +195,7 @@ def fitting_x(x1, x2, range_min, range_max, color):
     else:
         for search_point in range(x1, x2, -1):
             for range_of_points in range(range_min, range_max):
-                if seg_info[range_of_points, search_point][0] == color:
+                if seg_info[range_of_points, search_point][0] == color[0]:
                     cali_point = search_point
                     state = True
                     break
@@ -211,7 +211,7 @@ def fitting_y(y1, y2, range_min, range_max, color):
     if (y1 < y2):
         for search_point in range(y1, y2):
             for range_of_points in range(range_min, range_max):
-                if seg_info[search_point, range_of_points][0] == color:
+                if seg_info[search_point, range_of_points][0] == color[0]:
                     cali_point = search_point
                     state = True
                     break
@@ -221,7 +221,7 @@ def fitting_y(y1, y2, range_min, range_max, color):
     else:
         for search_point in range(y1, y2, -1):
             for range_of_points in range(range_min, range_max):
-                if seg_info[search_point, range_of_points][0] == color:
+                if seg_info[search_point, range_of_points][0] == color[0]:
                     cali_point = search_point
                     state = True
                     break
@@ -307,10 +307,10 @@ def processing(img, v_data, w_data, index):
         center_y = (min_y + max_y)//2
 
         if filtering(v_bb_array, Vehicle_COLOR) and pre_occluded_objects_excluded(v_bb_array, area_info, Vehicle_COLOR): 
-            cali_min_x = fitting_x(min_x, max_x, min_y, max_y, 142)
-            cali_max_x = fitting_x(max_x, min_x, min_y, max_y, 142)
-            cali_min_y = fitting_y(min_y, max_y, min_x, max_x, 142)
-            cali_max_y = fitting_y(max_y, min_y, min_x, max_x, 142)
+            cali_min_x = fitting_x(min_x, max_x, min_y, max_y, Vehicle_COLOR)
+            cali_max_x = fitting_x(max_x, min_x, min_y, max_y, Vehicle_COLOR)
+            cali_min_y = fitting_y(min_y, max_y, min_x, max_x, Vehicle_COLOR)
+            cali_max_y = fitting_y(max_y, min_y, min_x, max_x, Vehicle_COLOR)
             v_cali_array = [cali_min_x, cali_max_x, cali_min_y, cali_max_y]
 
             if small_objects_excluded(v_cali_array, 10) and post_occluded_objects_excluded(v_cali_array, Vehicle_COLOR):
@@ -322,12 +322,14 @@ def processing(img, v_data, w_data, index):
                 f.write(str(vehicle_class) + ' ' + str("%0.6f" % darknet_x) + ' ' + str("%0.6f" % darknet_y) + ' ' + 
                 str("%0.6f" % darknet_width) + ' ' + str("%0.6f" % darknet_height) + "\n")
 
-                cv2.line(img, (cali_min_x, cali_min_y), (cali_max_x, cali_min_y), VBB_COLOR, 3)
-                cv2.line(img, (cali_max_x, cali_min_y), (cali_max_x, cali_max_y), VBB_COLOR, 3)
-                cv2.line(img, (cali_max_x, cali_max_y), (cali_min_x, cali_max_y), VBB_COLOR, 3)
-                cv2.line(img, (cali_min_x, cali_max_y), (cali_min_x, cali_min_y), VBB_COLOR, 3)
+                cv2.line(img, (cali_min_x, cali_min_y), (cali_max_x, cali_min_y), VBB_COLOR, 2)
+                cv2.line(img, (cali_max_x, cali_min_y), (cali_max_x, cali_max_y), VBB_COLOR, 2)
+                cv2.line(img, (cali_max_x, cali_max_y), (cali_min_x, cali_max_y), VBB_COLOR, 2)
+                cv2.line(img, (cali_min_x, cali_max_y), (cali_min_x, cali_min_y), VBB_COLOR, 2)
 
     # Walker (Pedestrian)
+    object_area(w_data)
+
     for wbbox in w_data:
         array_x = []
         array_y = []
@@ -354,10 +356,10 @@ def processing(img, v_data, w_data, index):
         max_y = max(array_y)
         w_bb_array = [min_x, max_x, min_y, max_y]
         if filtering(w_bb_array, Walker_COLOR) and pre_occluded_objects_excluded(w_bb_array, area_info, Walker_COLOR): 
-            cali_min_x = fitting_x(min_x, max_x, min_y, max_y, 60)
-            cali_max_x = fitting_x(max_x, min_x, min_y, max_y, 60)
-            cali_min_y = fitting_y(min_y, max_y, min_x, max_x, 60)
-            cali_max_y = fitting_y(max_y, min_y, min_x, max_x, 60)
+            cali_min_x = fitting_x(min_x, max_x, min_y, max_y, Walker_COLOR)
+            cali_max_x = fitting_x(max_x, min_x, min_y, max_y, Walker_COLOR)
+            cali_min_y = fitting_y(min_y, max_y, min_x, max_x, Walker_COLOR)
+            cali_max_y = fitting_y(max_y, min_y, min_x, max_x, Walker_COLOR)
             w_cali_array = [cali_min_x, cali_max_x, cali_min_y, cali_max_y]
 
             if small_objects_excluded(w_cali_array, 7) and post_occluded_objects_excluded(w_cali_array, Walker_COLOR):
@@ -369,10 +371,10 @@ def processing(img, v_data, w_data, index):
                 f.write(str(walker_class) + ' ' + str("%0.6f" % darknet_x) + ' ' + str("%0.6f" % darknet_y) + ' ' + 
                 str("%0.6f" % darknet_width) + ' ' + str("%0.6f" % darknet_height) + "\n")
 
-                cv2.line(img, (cali_min_x, cali_min_y), (cali_max_x, cali_min_y), WBB_COLOR, 3)
-                cv2.line(img, (cali_max_x, cali_min_y), (cali_max_x, cali_max_y), WBB_COLOR, 3)
-                cv2.line(img, (cali_max_x, cali_max_y), (cali_min_x, cali_max_y), WBB_COLOR, 3)
-                cv2.line(img, (cali_min_x, cali_max_y), (cali_min_x, cali_min_y), WBB_COLOR, 3)
+                cv2.line(img, (cali_min_x, cali_min_y), (cali_max_x, cali_min_y), WBB_COLOR, 2)
+                cv2.line(img, (cali_max_x, cali_min_y), (cali_max_x, cali_max_y), WBB_COLOR, 2)
+                cv2.line(img, (cali_max_x, cali_max_y), (cali_min_x, cali_max_y), WBB_COLOR, 2)
+                cv2.line(img, (cali_min_x, cali_max_y), (cali_min_x, cali_min_y), WBB_COLOR, 2)
 
     f.close()
     cv2.imwrite('draw_bounding_box/image'+str(index)+'.png', img)
@@ -397,17 +399,3 @@ run()
 end = time.time()
 print(index_count)
 print(float(end - start))
-
-
-
-
-
-
-
-
-
-
-
-####################################################
-# Convert Image and Ground Truth Data to json File #
-####################################################

@@ -530,7 +530,7 @@ class BasicSynchronousClient(object):
             i = np.array(img.raw_data)
             i2 = i.reshape((VIEW_HEIGHT, VIEW_WIDTH, 4))
             i3 = i2[:, :, :3]
-            cv2.imwrite('custom_data/rgb' + str(self.image_count) + '.png', i3)           
+            cv2.imwrite('custom_data/image' + str(self.image_count) + '.png', i3)           
             print("RGBImage")
 
     @staticmethod
