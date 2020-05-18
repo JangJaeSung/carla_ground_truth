@@ -22,7 +22,7 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 > ./dynamic_weather.py  
 
 * Execute Generating Code  
-> ./object_bounding_box.py -l N  
+> ./object_bounding_box.py -l N   
 
 generate_ground_truth.py
 ------------------------
