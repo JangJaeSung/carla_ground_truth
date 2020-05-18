@@ -1,10 +1,5 @@
 #!/usr/bin/env python
 
-# Copyright (c) 2019 Aptiv
-#
-# This work is licensed under the terms of the MIT license.
-# For a copy, see <https://opensource.org/licenses/MIT>.
-
 """
 An example of client-side bounding boxes with basic car controls.
 
@@ -610,6 +605,8 @@ class BasicSynchronousClient(object):
                 pygame_clock.tick_busy_loop(60)
 
                 self.render(self.display)
+                if self.image_count == 5000:
+                    return True
 
                 self.time_interval += 1
                 if ((self.time_interval % args.CaptureLoop) == 0 and (args.CaptureLoop is not 1) and self.loop_state):
