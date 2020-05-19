@@ -531,7 +531,7 @@ class BasicSynchronousClient(object):
             i2 = i.reshape((VIEW_HEIGHT, VIEW_WIDTH, 4))
             i3 = i2[:, :, :3]
             cv2.imwrite('custom_data/image' + str(self.image_count) + '.png', i3)           
-            print("RGBImage")
+            print("RGB(custom)Image")
 
     @staticmethod
     def set_segmentation(weak_self, img):
@@ -591,7 +591,7 @@ class BasicSynchronousClient(object):
             pedestrians = self.world.get_actors().filter('walker.pedestrian.*')
 
 
-            self.image_count = 0 
+            self.image_count = 0
             self.time_interval = 0
 
             global vehicle_bbox_record
@@ -605,8 +605,6 @@ class BasicSynchronousClient(object):
                 pygame_clock.tick_busy_loop(60)
 
                 self.render(self.display)
-                if self.image_count == 5000:
-                    return True
 
                 self.time_interval += 1
                 if ((self.time_interval % args.CaptureLoop) == 0 and self.loop_state):
