@@ -45,6 +45,8 @@ if not os.path.exists(dir_draw):
     os.makedirs(dir_draw)
 ###################################
 
+dataEA = len(os.walk('VehicleBBox/').next()[2])
+
 VIEW_WIDTH = 1920//2
 VIEW_HEIGHT = 1080//2
 VIEW_FOV = 90
@@ -55,9 +57,9 @@ WBB_COLOR = (255, 0, 0)
 Vehicle_COLOR = np.array([142, 0, 0])
 Walker_COLOR = np.array([60, 20, 220])
 
-rgb_info = np.zeros((540, 960, 3), dtype="i")
-seg_info = np.zeros((540, 960, 3), dtype="i")
-area_info = np.zeros(shape=[540, 960, 3], dtype=np.uint8)
+rgb_info = np.zeros((VIEW_HEIGHT, VIEW_WIDTH, 3), dtype="i")
+seg_info = np.zeros((VIEW_HEIGHT, VIEW_WIDTH, 3), dtype="i")
+area_info = np.zeros(shape=[VIEW_HEIGHT, VIEW_WIDTH, 3], dtype=np.uint8)
 index_count = 0
 
 # Brings Images and Bounding Box Information
@@ -68,7 +70,7 @@ def reading_data(index):
     k = 0
     w = 0
 
-    rgb_img = cv2.imread('custom_data/rgb'+ str(index)+ '.png', cv2.IMREAD_COLOR)
+    rgb_img = cv2.imread('custom_data/image'+ str(index)+ '.png', cv2.IMREAD_COLOR)
     seg_img = cv2.imread('SegmentationImage/seg'+ str(index)+ '.png', cv2.IMREAD_COLOR)
 
     if str(rgb_img) != "None" and str(seg_img) != "None":
@@ -148,7 +150,7 @@ def converting(bounding_boxes, line_length):
 # Gets Object's Bounding Box Area
 def object_area(data):
     global area_info
-    area_info = np.zeros(shape=[540, 960, 3], dtype=np.uint8)
+    area_info = np.zeros(shape=[VIEW_HEIGHT, VIEW_WIDTH, 3], dtype=np.uint8)
 
     for vehicle_area in data:
         array_x = []
@@ -384,7 +386,7 @@ def run():
     global index_count
     train = open("my_data/train.txt", 'w')
 
-    for i in range(10000):
+    for i in range(dataEA + 1):
         if reading_data(i) != False:
             v_four_points = converting(reading_data(i)[0], reading_data(i)[1])
             w_four_points = converting(reading_data(i)[2], reading_data(i)[3])
@@ -393,9 +395,12 @@ def run():
             index_count = index_count + 1
             print(i)
     train.close()
+    print(index_count)
 
-start = time.time()
-run()
-end = time.time()
-print(index_count)
-print(float(end - start))
+if __name__ == "__main__":
+    start = time.time()
+
+    run()
+
+    end = time.time()
+    print(float(end - start))
