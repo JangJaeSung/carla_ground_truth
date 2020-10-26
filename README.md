@@ -19,7 +19,7 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 
 * Spawn Object and Change Various Weathers (CARLA Python example). Link: [https://github.com/carla-simulator/carla/tree/master/PythonAPI/examples]  
 Spawn NPC (Vehicles and Walkers).
-> ./spawn_npc.py -n *N* -w *W*  
+> ./spawn.py -n *N* -w *W*  
 > ./dynamic_weather.py  
 
 **Execute Generating Code**  
