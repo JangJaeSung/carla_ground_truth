@@ -20,12 +20,12 @@ This API helps you information about the RGB Image, Semantic Segmentation Image 
 * Spawn Object and Change Various Weathers (CARLA Python example). Link: [https://github.com/carla-simulator/carla/tree/master/PythonAPI/examples]  
 Spawn NPC (Vehicles and Walkers).
 > ./spawn.py -n *N* -w *W*  
-> ./dynamic_weather.py  
+> ./weather.py  
 
 **Execute Generating Code**  
 Obtain information about RGB Image, Semantic segmentation Image and Bounding Boxes for Ground Truth Generation from CARLA.
 When a period (loop N) is specified, data capture is executed at that interval. This API helps users control the start and end of automatic capture through keyboard input. It also provides a feature that allows users to capture the scene they want immediately at the moment.  
-> ./extract_bounding_box.py -l *N*   
+> ./extract.py -l *N*   
 
 These datas (RGB, Segmentation and Bounding Box) are stored in different folders at the same time.
 
@@ -33,7 +33,7 @@ These datas (RGB, Segmentation and Bounding Box) are stored in different folders
 Generation of Ground Truth for Darknet YOLO Framework
 ------------------------
 This API helps to post-process the data obtained above and to create a Ground Truth for Darknet YOLO Framework.  
-> ./generate_ground_truth.py  
+> ./generate.py  
 
 Data for learning is stored in folder 'custom_data', and the results of the bounding box generated in folder 'draw_bounding_box' can be seen.
 It will create .txt file for each .png rgb image file with the same name in the same directory. Ground truth formet of Darknet is shown below.
