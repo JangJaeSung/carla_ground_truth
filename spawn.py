@@ -170,9 +170,9 @@ def main():
             else:
                 walkers_list.append({"id": results[i].actor_id})
                 walker_speed2.append(walker_speed[i])
-        #walker_speed = walker_speed2
-        walker_speed2 = []
-        walker_speed = []
+        walker_speed = walker_speed2
+        #walker_speed2 = []
+        #walker_speed = []
         # 3. we spawn the walker controller
         batch = []
         walker_controller_bp = world.get_blueprint_library().find('controller.ai.walker')
@@ -188,6 +188,7 @@ def main():
         for i in range(len(walkers_list)):
             all_id.append(walkers_list[i]["con"])
             all_id.append(walkers_list[i]["id"])
+        all_actors = world.get_actors(all_id)
         #all_actors = world.get_actors(all_id)
 
         # wait for a tick to ensure client receives the last transform of the walkers we have just created
@@ -196,13 +197,13 @@ def main():
         # 5. initialize each controller and set target to walk to (list is [controler, actor, controller, actor ...])
         # set how many pedestrians can cross the road
         world.set_pedestrians_cross_factor(percentagePedestriansCrossing)
-        #for i in range(0, len(all_id), 2):
+        for i in range(0, len(all_id), 2):
             # start walker
-            #all_actors[i].start()
+            all_actors[i].start()
             # set walk to random point
-            #all_actors[i].go_to_location(world.get_random_location_from_navigation())
+            all_actors[i].go_to_location(world.get_random_location_from_navigation())
             # max speed
-            #all_actors[i].set_max_speed(float(walker_speed[int(i/2)]))
+            all_actors[i].set_max_speed(float(walker_speed[int(i/2)]))
 
         print('spawned %d vehicles and %d walkers, press Ctrl+C to exit.' % (len(vehicles_list), len(walkers_list)))
 
